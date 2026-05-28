@@ -10,18 +10,21 @@ const stats = {
 /* tutaj umieść swój kod */
 const pElements = document.querySelectorAll('.text');
 
+const incrementStat = (category, key) => {
+	return (stats[category][key] = (stats[category][key] || 0) + 1);
+};
+
 const countClicks = function (e) {
 	if (e.target.classList.contains('link')) {
 		e.preventDefault();
 
 		const path = e.target.getAttribute('href');
-		stats.links[path] = (stats.links[path] || 0) + 1;
-
+		incrementStat('links', path);
 		return;
 	}
 
 	const pId = e.currentTarget.dataset.id;
-	stats.paragraphs[pId] = (stats.paragraphs[pId] || 0) + 1;
+	incrementStat('paragraphs', pId);
 };
 
 pElements.forEach(pEl => {
